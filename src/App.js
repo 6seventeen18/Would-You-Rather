@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import LoginForm from './components/LoginForm'
+import LeaderBoard from './components/LeaderBoard'
 import { BrowserRouter } from 'react-router-dom'
 
 
@@ -15,7 +16,16 @@ class App extends Component {
         <Route exact path='/' render={() => (
           <div class='text-center'>
             <Nav />
-            <LoginForm />
+            <div class='container'>
+              <LoginForm />
+            </div>
+          </div>
+        )}/>
+
+        <Route exact path='/leaderboard' render={() => (
+          <div>
+            <Nav />
+            <LeaderBoard />
           </div>
         )}/>
       </div>
