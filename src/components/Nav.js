@@ -11,7 +11,7 @@ export default function Nav () {
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <NavLink to='/' exact className="nav-link">Home</NavLink>
+              <NavLink to='/home' exact className="nav-link">Home</NavLink>
             </li>
             <li class="nav-item">
               <NavLink to='/leaderboard' className="nav-link">Leader Board</NavLink>
@@ -23,7 +23,7 @@ export default function Nav () {
           <div class="navbar-brand">Signed in as [USERNAME]</div>
           <ul class="navbar-nav form-inline mt-2 mt-md-0">
             <li class="nav-item float-right">
-              <NavLink className="nav-link" to='/signout'>Sign Out</NavLink>
+              <NavLink className="nav-link" to='/'>Sign Out</NavLink>
             </li>
           </ul>
         </div>
