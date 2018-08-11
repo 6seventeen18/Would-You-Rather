@@ -4,6 +4,7 @@ import Nav from './components/Nav'
 import LoginForm from './components/LoginForm'
 import LeaderBoard from './components/LeaderBoard'
 import QuestionList from './components/QuestionList'
+import Question from './components/Question'
 import { BrowserRouter } from 'react-router-dom'
 
 
@@ -29,7 +30,7 @@ class App extends Component {
         <Route exact path='/home' render={() => (
           <div>
             <Nav />
-            <QuestionList questionType='unanswered' />
+            <QuestionList viewType='unanswered' />
           </div>
         )}/>
 
@@ -37,7 +38,7 @@ class App extends Component {
         <Route exact path='/answered-questions' render={() => (
           <div>
             <Nav />
-            <QuestionList questionType='answered' />
+            <QuestionList viewType='answered' />
           </div>
         )}/>
 
@@ -45,6 +46,22 @@ class App extends Component {
           <div>
             <Nav />
             <LeaderBoard />
+          </div>
+        )}/>
+
+        { /* TODO: this should be /questions/:question_id when state is added */ }
+        <Route exact path='/unanswered-question' render={() => (
+          <div class='text-center'>
+            <Nav />
+            <QuestionList viewType='forSubmission' />
+          </div>
+        )}/>
+
+        { /* TODO: this should be /questions/:question_id when state is added */ }
+        <Route exact path='/answered-question' render={() => (
+          <div class='text-center'>
+            <Nav />
+            <QuestionList viewType='withStats' />
           </div>
         )}/>
       </div>
