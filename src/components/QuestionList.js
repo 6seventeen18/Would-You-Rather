@@ -11,7 +11,7 @@ class QuestionList extends Component {
 
   render() {
     const { viewType } = this.props
-    const showSingle = viewType === 'forSubmission' || 'withStats'
+    const showSingle = viewType === 'forSubmission' || viewType === 'withStats'
 
     return (
       <div class='container text-center'>

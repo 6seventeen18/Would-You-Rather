@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
+import { FaCheckCircle } from 'react-icons/fa'
 
 class Question extends Component {
   static propTypes = {
     viewType: PropTypes.string.isRequired,
   }
-
 
   render() {
     const { viewType } = this.props
@@ -46,6 +46,7 @@ class Question extends Component {
               <p class='card-text font-weight-bold'>Would You Rather:</p>
               <div class='card-text'>
                 <mark><strong>Fight one horse sized mouse</strong></mark>
+                <FaCheckCircle className='text-success' />
                 <span class='font-italic text-success'>(5 votes / 60%)</span>
               </div>
               <div class='card-text font-weight-bold'>-- OR --</div>
@@ -106,7 +107,10 @@ class Question extends Component {
             </div>
             <div class='column ml-3 p-3'>
               <p class='card-text font-weight-bold'>Would You Rather:</p>
-              <div class='card-text'><mark><strong>Fight one horse sized mouse</strong></mark></div>
+              <div class='card-text'>
+                <mark><strong>Fight one horse sized mouse</strong></mark>
+                <FaCheckCircle className='text-success' />
+              </div>
               <div class='card-text font-weight-bold'>-- OR --</div>
               <div class='card-text text-muted'>Fight one hundred mouse sized horses</div>
             </div>
