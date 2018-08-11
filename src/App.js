@@ -4,7 +4,7 @@ import Nav from './components/Nav'
 import LoginForm from './components/LoginForm'
 import LeaderBoard from './components/LeaderBoard'
 import QuestionList from './components/QuestionList'
-import Question from './components/Question'
+import AddQuestion from './components/AddQuestion'
 import { BrowserRouter } from 'react-router-dom'
 
 
@@ -62,6 +62,13 @@ class App extends Component {
           <div class='text-center'>
             <Nav />
             <QuestionList viewType='withStats' />
+          </div>
+        )}/>
+
+        <Route exact path='/add' render={() => (
+          <div class='text-center'>
+          <Nav />
+          <AddQuestion />
           </div>
         )}/>
       </div>
