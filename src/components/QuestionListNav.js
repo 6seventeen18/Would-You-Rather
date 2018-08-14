@@ -21,13 +21,13 @@ class QuestionListNav extends Component {
         return(
           <div>
             <NavLink to='/home' exact className="nav-link d-inline-block">Unanswered Polls</NavLink>
-            <div class='d-inline-block'>Answered Polls</div>
+            <div className='d-inline-block'>Answered Polls</div>
           </div>
         )
       case UNANSWERED_QUESTION :
         return(
           <div>
-            <div class='d-inline-block'>Unanswered Polls</div>
+            <div className='d-inline-block'>Unanswered Polls</div>
             <NavLink to='/answered-questions' exact className="nav-link d-inline-block">Answered Polls</NavLink>
           </div>
         )

@@ -3,14 +3,14 @@ import { NavLink } from 'react-router-dom'
 
 export default function LoginForm () {
   return (
-    <div class='container'>
-      <div class='row'>
-        <div class='col-sm'></div>
-        <div class='col-sm'>
+    <div className='container'>
+      <div className='row'>
+        <div className='col-sm'></div>
+        <div className='col-sm'>
           <form>
-            <div class="form-group">
+            <div className="form-group">
               <label for="exampleFormControlSelect1">Please select a user to log in:</label>
-              <select class="form-control" id="exampleFormControlSelect1">
+              <select className="form-control" id="exampleFormControlSelect1">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -20,7 +20,7 @@ export default function LoginForm () {
             </div>
           </form>
         </div>
-        <div class='col-sm'></div>
+        <div className='col-sm'></div>
       </div>
     </div>
   )

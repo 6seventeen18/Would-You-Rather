@@ -14,16 +14,16 @@ class QuestionList extends Component {
     const showSingle = viewType === 'forSubmission' || viewType === 'withStats'
 
     return (
-      <div class='container text-center'>
+      <div className='container text-center'>
         { /* TODO: This is just a stub for design purposes. QuestionList should be able
                    to render both types of questions, determine which type is currently
                    displayed, and show links to switch state */ }
         <QuestionListNav viewType={viewType} />
 
-        <div class='row'>
-          <div class='col'></div>
-          <div class='col-8'>
-            <div class="jumbotron pt-4 pb-4">
+        <div className='row'>
+          <div className='col'></div>
+          <div className='col-8'>
+            <div className="jumbotron pt-4 pb-4">
               { /* TODO: Remove this when a list of questions is passed in */ }
               {showSingle ? (
                 <Question viewType={viewType} />
@@ -35,7 +35,7 @@ class QuestionList extends Component {
               )}
             </div>
           </div>
-          <div class='col'></div>
+          <div className='col'></div>
         </div>
       </div>
     )

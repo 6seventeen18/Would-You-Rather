@@ -35,24 +35,24 @@ class Question extends Component {
 
   questionWithStats = () => {
     return(
-      <div class='card text-left mb-3'>
-        <div class='card-header'>Stats for Poll by Joe Schmoe</div>
-        <div class='card-body p-0'>
-          <div class='row ml-0 mr-0'>
-            <div class='column border-right p-3'>
-              <img src='avatars/1.jpg' class='img-fluid rounded-circle'/>
+      <div className='card text-left mb-3'>
+        <div className='card-header'>Stats for Poll by Joe Schmoe</div>
+        <div className='card-body p-0'>
+          <div className='row ml-0 mr-0'>
+            <div className='column border-right p-3'>
+              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
             </div>
-            <div class='column ml-3 p-3'>
-              <p class='card-text font-weight-bold'>Would You Rather:</p>
-              <div class='card-text'>
+            <div className='column ml-3 p-3'>
+              <p className='card-text font-weight-bold'>Would You Rather:</p>
+              <div className='card-text'>
                 <mark><strong>Fight one horse sized mouse</strong></mark>
                 <FaCheckCircle className='text-success' />
-                <span class='font-italic text-success'>(5 votes / 60%)</span>
+                <span className='font-italic text-success'>(5 votes / 60%)</span>
               </div>
-              <div class='card-text font-weight-bold'>-- OR --</div>
-              <div class='card-text text-muted'>
+              <div className='card-text font-weight-bold'>-- OR --</div>
+              <div className='card-text text-muted'>
                 Fight one hundred mouse sized horses
-                <span class='font-italic text-success'>(5 votes / 60%)</span>
+                <span className='font-italic text-success'>(5 votes / 60%)</span>
               </div>
             </div>
           </div>
@@ -63,24 +63,24 @@ class Question extends Component {
 
   questionForSubmission = () => {
     return(
-      <div class='card text-left mb-3'>
-        <div class='card-header'>
+      <div className='card text-left mb-3'>
+        <div className='card-header'>
           Poll by Joe Schmoe
         </div>
-        <div class='card-body p-0'>
-          <div class='row ml-0 mr-0'>
-            <div class='column border-right p-3'>
-              <img src='avatars/1.jpg' class='img-fluid rounded-circle'/>
+        <div className='card-body p-0'>
+          <div className='row ml-0 mr-0'>
+            <div className='column border-right p-3'>
+              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
             </div>
-            <div class='column ml-3 p-3'>
-              <p class='card-text font-weight-bold'>Would You Rather:</p>
-              <div class='card-text'>
+            <div className='column ml-3 p-3'>
+              <p className='card-text font-weight-bold'>Would You Rather:</p>
+              <div className='card-text'>
                 { /* TODO: This will need to submit the answer */ }
                 <NavLink to='/answered-question' className="btn btn-primary mr-2">pick me!</NavLink>
                 Fight one horse sized mouse
               </div>
-              <div class='card-text font-weight-bold'>-- OR --</div>
-              <div class='card-text'>
+              <div className='card-text font-weight-bold'>-- OR --</div>
+              <div className='card-text'>
               { /* TODO: This will need to submit the answer */ }
                 <NavLink to='/answered-question' className="btn btn-primary mr-2">pick me!</NavLink>
                 Fight one hundred mouse sized horses
@@ -94,25 +94,25 @@ class Question extends Component {
 
   answeredQuestion = () => {
     return (
-      <div class='card text-left mb-3'>
-        <div class='card-header'>
+      <div className='card text-left mb-3'>
+        <div className='card-header'>
           Poll by Joe Schmoe
           { /* TODO: this will go to /questions/:question_id when state is implemented */ }
           <NavLink to='/answered-question' exact className="btn btn-primary float-right">View Stats</NavLink>
         </div>
-        <div class='card-body p-0'>
-          <div class='row ml-0 mr-0'>
-            <div class='column border-right p-3'>
-              <img src='avatars/1.jpg' class='img-fluid rounded-circle'/>
+        <div className='card-body p-0'>
+          <div className='row ml-0 mr-0'>
+            <div className='column border-right p-3'>
+              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
             </div>
-            <div class='column ml-3 p-3'>
-              <p class='card-text font-weight-bold'>Would You Rather:</p>
-              <div class='card-text'>
+            <div className='column ml-3 p-3'>
+              <p className='card-text font-weight-bold'>Would You Rather:</p>
+              <div className='card-text'>
                 <mark><strong>Fight one horse sized mouse</strong></mark>
                 <FaCheckCircle className='text-success' />
               </div>
-              <div class='card-text font-weight-bold'>-- OR --</div>
-              <div class='card-text text-muted'>Fight one hundred mouse sized horses</div>
+              <div className='card-text font-weight-bold'>-- OR --</div>
+              <div className='card-text text-muted'>Fight one hundred mouse sized horses</div>
             </div>
           </div>
         </div>
@@ -122,22 +122,22 @@ class Question extends Component {
 
   unansweredQuestion = () => {
     return(
-      <div class='card text-left mb-3'>
-        <div class='card-header'>
+      <div className='card text-left mb-3'>
+        <div className='card-header'>
           Poll by Joe Schmoe
           { /* TODO: this will go to /questions/:question_id when state is implemented */ }
           <NavLink to='/unanswered-question' exact className="btn btn-primary float-right">Answer Poll</NavLink>
         </div>
-        <div class='card-body p-0'>
-          <div class='row ml-0 mr-0'>
-            <div class='column border-right p-3'>
-              <img src='avatars/1.jpg' class='img-fluid rounded-circle'/>
+        <div className='card-body p-0'>
+          <div className='row ml-0 mr-0'>
+            <div className='column border-right p-3'>
+              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
             </div>
-            <div class='column ml-3 p-3'>
-              <p class='card-text font-weight-bold'>Would You Rather:</p>
-              <div class='card-text'>Fight one horse sized mouse</div>
-              <div class='card-text font-weight-bold'>-- OR --</div>
-              <div class='card-text'>Fight one hundred mouse sized horses</div>
+            <div className='column ml-3 p-3'>
+              <p className='card-text font-weight-bold'>Would You Rather:</p>
+              <div className='card-text'>Fight one horse sized mouse</div>
+              <div className='card-text font-weight-bold'>-- OR --</div>
+              <div className='card-text'>Fight one hundred mouse sized horses</div>
             </div>
           </div>
         </div>
