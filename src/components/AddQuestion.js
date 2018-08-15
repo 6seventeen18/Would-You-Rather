@@ -23,6 +23,7 @@ class AddQuestion extends Component {
   }
 
   handleSubmit = (e) => {
+    /* TODO: prevent submission if text less than 3 characters */
     e.preventDefault()
      const { pollOption1, pollOption2 } = this.state
      const { dispatch, id } = this.props
@@ -54,12 +55,12 @@ class AddQuestion extends Component {
               <form onSubmit={this.handleSubmit}>
                 <div className='form-group'>
                   <h5><label htmlFor="pollOption1" className="float-left">Poll Option 1</label></h5>
-                  <input id="pollOption1" className="form-control form-control-lg" type="text" value={pollOption1} onChange={this.handleOption1Change}/>
+                  <input id="pollOption1" className="form-control form-control-lg" type="text" value={pollOption1} onChange={this.handleOption1Change} placeHolder="Enter an option with at least 3 characters"/>
                 </div>
 
                 <div className='form-group'>
                   <h5><label htmlFor="pollOption2" className="float-left text-large">Poll Option 2</label></h5>
-                  <input id="pollOption2" className="form-control form-control-lg" type="text" value={pollOption2} onChange={this.handleOption2Change}/>
+                  <input id="pollOption2" className="form-control form-control-lg" type="text" value={pollOption2} onChange={this.handleOption2Change} placeHolder="Enter an option with at least 3 characters"/>
                 </div>
 
                 <button
