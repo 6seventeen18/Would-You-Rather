@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import LeaderBoard from './components/LeaderBoard'
+import AddQuestion from './components/AddQuestion'
 
 class App extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class App extends Component {
       <div>
         {this.props.loading === true
           ? null
-          : <LeaderBoard />}
+          : <AddQuestion />}
       </div>
     )
   }
