@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { FaCheckCircle } from 'react-icons/fa'
@@ -10,6 +11,8 @@ class Question extends Component {
 
   render() {
     const { viewType } = this.props
+    const { author, optionOne, optionTwo } = this.props.question
+    // debugger
 
     { /* TDOD: These need to be in a shared helpers file */ }
     const ANSWERED_QUESTION = 'answered'
@@ -34,25 +37,34 @@ class Question extends Component {
   }
 
   questionWithStats = () => {
+    const { viewType } = this.props
+    const { author, optionOne, optionTwo } = this.props.question
+    const { name, avatarURL } = author
+    const optionOneText = optionOne.text
+    const optionTwoText = optionTwo.text
+    const optionOneVotes = optionOne['votes'].length
+    const optionTwoVotes = optionTwo['votes'].length
+    // debugger
+
     return(
       <div className='card text-left mb-3'>
-        <div className='card-header'>Stats for Poll by Joe Schmoe</div>
+        <div className='card-header'>Stats for Poll by {author.name}</div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-3'>
-              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
-                <mark><strong>Fight one horse sized mouse</strong></mark>
+                <mark><strong>{optionOneText}</strong></mark>
                 <FaCheckCircle className='text-success' />
-                <span className='font-italic text-success'>(5 votes / 60%)</span>
+                <span className='font-italic text-success'>({optionOneVotes} votes / 60%)</span>
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
               <div className='card-text text-muted'>
-                Fight one hundred mouse sized horses
-                <span className='font-italic text-success'>(5 votes / 60%)</span>
+                {optionTwoText}
+                <span className='font-italic text-success'>({optionTwoVotes} votes / 60%)</span>
               </div>
             </div>
           </div>
@@ -146,4 +158,27 @@ class Question extends Component {
   }
 }
 
-export default Question
+function formatQuestion (question, users) {
+  return {
+    id: question.id,
+    timestamp: question.timestamp,
+    author: users[question.author],
+    optionOne: question.optionOne,
+    optionTwo: question.optionTwo,
+  }
+}
+
+function mapStateToProps({authedUser, questions, users}, props) {
+  const { id } = props.match.params
+  const question = questions[id]
+
+  return {
+    authedUser,
+    id,
+    question: question
+      ? formatQuestion(question, users)
+      : null
+  }
+}
+
+export default connect(mapStateToProps)(Question)
