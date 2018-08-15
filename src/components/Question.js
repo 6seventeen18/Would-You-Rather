@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { FaCheckCircle } from 'react-icons/fa'
+import Pluralize from 'react-pluralize'
 
 class Question extends Component {
   static propTypes = {
@@ -36,6 +37,32 @@ class Question extends Component {
     }
   }
 
+  formattedAnswer = (firstOption, secondOption) => {
+    const optionText = firstOption.text
+    const firstOptionVotes = firstOption['votes'].length
+    const secondOptionVotes = secondOption['votes'].length
+
+    return (
+      <div>
+        { (firstOptionVotes >= secondOptionVotes)
+          ? <mark><strong>{optionText}</strong></mark>
+          : `${optionText}`
+        }
+
+        { firstOptionVotes >= secondOptionVotes
+            ? <FaCheckCircle className='text-success' />
+            : null
+        }
+        <span className='font-italic text-success'>
+          (
+          <Pluralize singular="vote" plural="votes" count={firstOptionVotes} />
+          /
+          {firstOptionVotes / (firstOptionVotes + secondOptionVotes) * 100}%)
+        </span>
+      </div>
+    )
+  }
+
   questionWithStats = () => {
     const { viewType } = this.props
     const { author, optionOne, optionTwo } = this.props.question
@@ -44,7 +71,6 @@ class Question extends Component {
     const optionTwoText = optionTwo.text
     const optionOneVotes = optionOne['votes'].length
     const optionTwoVotes = optionTwo['votes'].length
-    // debugger
 
     return(
       <div className='card text-left mb-3'>
@@ -57,14 +83,11 @@ class Question extends Component {
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
-                <mark><strong>{optionOneText}</strong></mark>
-                <FaCheckCircle className='text-success' />
-                <span className='font-italic text-success'>({optionOneVotes} votes / 60%)</span>
+                { this.formattedAnswer(optionOne, optionTwo) }
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
-              <div className='card-text text-muted'>
-                {optionTwoText}
-                <span className='font-italic text-success'>({optionTwoVotes} votes / 60%)</span>
+              <div className='card-text'>
+                { this.formattedAnswer(optionTwo, optionOne) }
               </div>
             </div>
           </div>
