@@ -11,32 +11,32 @@ class Question extends Component {
   }
 
   render() {
-    const { viewType } = this.props
-    // const { author, optionOne, optionTwo } = this.props.question
-    // debugger
+    { /* TODO: Add additional text when there is a tie */ }
+    const { id, viewType, allowSubmit, loggedInUser } = this.props
+    const hasAnswered = Object.keys(loggedInUser.answers).indexOf(id)
 
-    { /* TDOD: These need to be in a shared helpers file */ }
-    const ANSWERED_QUESTION = 'answered'
-    const UNANSWERED_QUESTION = 'unanswered'
-    const FOR_SUBMISSION = 'forSubmission'
-    const WITH_STATS = 'withStats'
-
-    switch (viewType) {
-      case ANSWERED_QUESTION :
-        return this.answeredQuestion()
-      case UNANSWERED_QUESTION :
-        return this.unansweredQuestion()
-      case FOR_SUBMISSION :
-        return this.questionForSubmission()
-      case WITH_STATS :
+    if (allowSubmit) {
+      console.log('allowSubmit = true')
+      if (hasAnswered) {
+        console.log('hasAnswered = true')
         return this.questionWithStats()
-      default :
-        return (
-          <div>invalid state</div>
-        )
+      } else {
+        console.log('hasAnswered = false')
+        return this.questionForSubmission()
+      }
+    } else {
+      console.log('allowSubmit = false')
+      if (hasAnswered) {
+        console.log('hasAnswered = true')
+        return this.answeredQuestion()
+      } else {
+        console.log('hasAnswered = false')
+        return this.unansweredQuestion()
+      }
     }
   }
 
+  /* for /question/:id */
   formattedAnswer = (firstOption, secondOption) => {
     const optionText = firstOption.text
     const firstOptionVotes = firstOption['votes'].length
@@ -59,6 +59,25 @@ class Question extends Component {
           /
           {firstOptionVotes / (firstOptionVotes + secondOptionVotes) * 100}%)
         </span>
+      </div>
+    )
+  }
+
+  /* for home page */
+  formattedAnswerForUser = (option, highlightOption = false) => {
+    const optionText = option.text
+
+    return (
+      <div>
+        { (highlightOption)
+          ?
+            <div class='.d-inline-block'>
+              <mark><strong>{optionText}</strong></mark>
+              <FaCheckCircle className='text-success' />
+              <span className='font-italic text-success'>(your selection)</span>
+            </div>
+          : `${optionText}`
+        }
       </div>
     )
   }
@@ -135,26 +154,32 @@ class Question extends Component {
 
   /* view for question on home page when logged in user has answered */
   answeredQuestion = () => {
+    const { id, author, optionOne, optionTwo } = this.props.question
+    const { name, avatarURL } = author
+    const navLink = `/question/${id}`
+    const highlightOptionOne = author.answers[id] === 'optionOne'
+    const highlightOptionTwo = author.answers[id] === 'optionTwo'
+
     return (
       <div className='card text-left mb-3'>
         <div className='card-header'>
-          Poll by Joe Schmoe
-          { /* TODO: this will go to /questions/:question_id when state is implemented */ }
-          <NavLink to='/answered-question' exact className="btn btn-primary float-right">View Stats</NavLink>
+          Poll by {name}
+          <NavLink to={navLink} exact className="btn btn-primary float-right">View Stats</NavLink>
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-3'>
-              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
-                <mark><strong>Fight one horse sized mouse</strong></mark>
-                <FaCheckCircle className='text-success' />
+                { this.formattedAnswerForUser(optionOne, highlightOptionOne) }
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
-              <div className='card-text text-muted'>Fight one hundred mouse sized horses</div>
+              <div className='card-text'>
+                { this.formattedAnswerForUser(optionTwo, highlightOptionTwo) }
+              </div>
             </div>
           </div>
         </div>
@@ -209,9 +234,11 @@ function mapStateToProps({authedUser, questions, users}, props) {
   const { id } = props
   const question = questions[id]
   const allowSubmit = props.allowSubmit || false
+  const loggedInUser = users[authedUser]
 
   return {
     authedUser,
+    loggedInUser,
     allowSubmit,
     id,
     question: question
