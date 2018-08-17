@@ -12,7 +12,7 @@ class Question extends Component {
 
   render() {
     const { viewType } = this.props
-    const { author, optionOne, optionTwo } = this.props.question
+    // const { author, optionOne, optionTwo } = this.props.question
     // debugger
 
     { /* TDOD: These need to be in a shared helpers file */ }
@@ -156,23 +156,26 @@ class Question extends Component {
   }
 
   unansweredQuestion = () => {
+    const { id, author, optionOne, optionTwo } = this.props.question
+    const { name, avatarURL } = author
+    const navLink = `/question/${id}`
+
     return(
       <div className='card text-left mb-3'>
         <div className='card-header'>
-          Poll by Joe Schmoe
-          { /* TODO: this will go to /questions/:question_id when state is implemented */ }
-          <NavLink to='/unanswered-question' exact className="btn btn-primary float-right">Answer Poll</NavLink>
+          Poll by { author.name }
+          <NavLink to={navLink} exact className="btn btn-primary float-right">Answer Poll</NavLink>
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-3'>
-              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
-              <div className='card-text'>Fight one horse sized mouse</div>
+              <div className='card-text'>{optionOne.text}</div>
               <div className='card-text font-weight-bold'>-- OR --</div>
-              <div className='card-text'>Fight one hundred mouse sized horses</div>
+              <div className='card-text'>{optionTwo.text}</div>
             </div>
           </div>
         </div>
@@ -181,25 +184,26 @@ class Question extends Component {
   }
 }
 
-function formatQuestion (question, users) {
+// function formatQuestion (question, users) {
+function formatQuestion (question, author) {
   return {
     id: question.id,
     timestamp: question.timestamp,
-    author: users[question.author],
+    author: author,
     optionOne: question.optionOne,
     optionTwo: question.optionTwo,
   }
 }
 
-function mapStateToProps({authedUser, questions, users}, props) {
-  const { id } = props.match.params
+// function mapStateToProps({authedUser, questions, users}, props) {
+function mapStateToProps({authedUser, questions, users}, { id }) {
   const question = questions[id]
 
   return {
     authedUser,
     id,
     question: question
-      ? formatQuestion(question, users)
+      ? formatQuestion(question, users[question.author])
       : null
   }
 }
