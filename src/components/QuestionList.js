@@ -26,7 +26,7 @@ class QuestionList extends Component {
           <div className='col-8'>
             <div className="jumbotron pt-4 pb-4">
               {this.props.questionIds.map((id) => (
-                <Question viewType='unanswered' id={id} key={id} />
+                <Question viewType='answered' id={id} key={id} />
               ))}
             </div>
           </div>

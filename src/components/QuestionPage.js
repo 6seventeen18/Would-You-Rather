@@ -11,7 +11,7 @@ class QuestionPage extends Component {
           <div className='col'></div>
           <div className='col-8'>
             <div className="jumbotron pt-4 pb-4">
-              <Question id={id} viewType='unanswered' />
+              <Question id={id} viewType='withStats' allowSubmit="true" />
             </div>
           </div>
           <div className='col'></div>

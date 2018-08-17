@@ -63,6 +63,7 @@ class Question extends Component {
     )
   }
 
+  /* view for question/:id when logged in user has answered */
   questionWithStats = () => {
     const { viewType } = this.props
     const { author, optionOne, optionTwo } = this.props.question
@@ -96,29 +97,34 @@ class Question extends Component {
     )
   }
 
+  /* view for question/:id when logged in user has not answered */
   questionForSubmission = () => {
+    const { id, author, optionOne, optionTwo } = this.props.question
+    const { name, avatarURL } = author
+    const navLink = `/question/${id}`
+
     return(
       <div className='card text-left mb-3'>
         <div className='card-header'>
-          Poll by Joe Schmoe
+          Poll by {name}
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-3'>
-              <img src='avatars/1.jpg' className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
                 { /* TODO: This will need to submit the answer */ }
                 <NavLink to='/answered-question' className="btn btn-primary mr-2">pick me!</NavLink>
-                Fight one horse sized mouse
+                {optionOne.text}
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
               <div className='card-text'>
               { /* TODO: This will need to submit the answer */ }
                 <NavLink to='/answered-question' className="btn btn-primary mr-2">pick me!</NavLink>
-                Fight one hundred mouse sized horses
+                {optionTwo.text}
               </div>
             </div>
           </div>
@@ -127,6 +133,7 @@ class Question extends Component {
     )
   }
 
+  /* view for question on home page when logged in user has answered */
   answeredQuestion = () => {
     return (
       <div className='card text-left mb-3'>
@@ -155,6 +162,7 @@ class Question extends Component {
     )
   }
 
+  /* view for question on home page when logged in user has not answered */
   unansweredQuestion = () => {
     const { id, author, optionOne, optionTwo } = this.props.question
     const { name, avatarURL } = author
@@ -196,11 +204,15 @@ function formatQuestion (question, author) {
 }
 
 // function mapStateToProps({authedUser, questions, users}, props) {
-function mapStateToProps({authedUser, questions, users}, { id }) {
+// function mapStateToProps({authedUser, questions, users}, { id }) {
+function mapStateToProps({authedUser, questions, users}, props) {
+  const { id } = props
   const question = questions[id]
+  const allowSubmit = props.allowSubmit || false
 
   return {
     authedUser,
+    allowSubmit,
     id,
     question: question
       ? formatQuestion(question, users[question.author])
