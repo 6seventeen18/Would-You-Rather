@@ -27,20 +27,36 @@ import {
 
 function toggleQuestions(questions, action) {
   const questionIds = Object.keys(questions)
-  const answeredQuestions = action.answeredQuestions
-  debugger
+  const answeredQuestionKeys = action.answeredQuestions
 
   switch(action.questionType) {
     case 'answered' :
+      const answeredQuestionArray = answeredQuestionKeys.map((key) => questions[key])
+      const answeredQuestions = {}
+
+      for(const q of answeredQuestionArray.entries()) {
+        answeredQuestions[q[1].id] = q[1]
+      }
+
+      console.log('answered state: ', { ...questions, ...answeredQuestions, })
+
       return {
         ...questions,
-        ...answeredQuestions
+        ...answeredQuestions,
       }
     case 'unanswered' :
-      const unansweredQuestions = questionIds.filter((q) => answeredQuestions.indexOf(q) < 0)
+      const unansweredQuestionIds = questionIds.filter((q) => answeredQuestionKeys.indexOf(q) < 0)
+      const unansweredQuestionArray = unansweredQuestionIds.map((key) => questions[key])
+      const unansweredQuestions = {}
+      for(const q of unansweredQuestionArray.entries()) {
+        unansweredQuestions[q[1].id] = q[1]
+      }
+
+      console.log('unanswered state: ', { ...questions, ...unansweredQuestions, })
+
       return {
         ...questions,
-        ...unansweredQuestions
+        ...unansweredQuestions,
       }
     default :
       return questions

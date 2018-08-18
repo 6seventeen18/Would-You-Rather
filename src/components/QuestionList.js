@@ -43,6 +43,7 @@ class QuestionList extends Component {
 }
 
 function mapStateToProps ({ questions, users, authedUser }) {
+  // debugger
   const currentUser = users[authedUser]
   const questionIds = Object.keys(questions)
   const answeredQuestions = Object.keys(currentUser.answers)
