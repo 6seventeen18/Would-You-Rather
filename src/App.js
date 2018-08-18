@@ -7,7 +7,8 @@ import LoadingBar from 'react-redux-loading-bar'
 import AddQuestion from './components/AddQuestion'
 import QuestionPage from './components/QuestionPage'
 import Question from './components/Question'
-import QuestionList from './components/QuestionList'
+import AnsweredQuestionList from './components/AnsweredQuestionList'
+import UnansweredQuestionList from './components/UnansweredQuestionList'
 import Nav from './components/Nav'
 
 class App extends Component {
@@ -27,7 +28,8 @@ class App extends Component {
               : <div>
                   <Nav />
                   <div className='container'>
-                  <Route path='/' exact component={QuestionList} />
+                  <Route path='/' exact component={UnansweredQuestionList} />
+                  <Route path='/answered-questions' exact component={AnsweredQuestionList} />
                   <Route path='/leaderboard' component={LeaderBoard} />
                   <Route path='/add' component={AddQuestion} />
                   <Route path='/question/:id' component={QuestionPage} />

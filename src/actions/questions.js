@@ -3,43 +3,11 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
-export const TOGGLE_QUESTIONS = 'TOGGLE_QUESTIONS'
 
 function addQuestion (question) {
   return {
     type: ADD_QUESTION,
     question,
-  }
-}
-
-function toggleQuestions (questionType='unanswered', answeredQuestions) {
-  return {
-    type: TOGGLE_QUESTIONS,
-    questionType,
-    answeredQuestions
-  }
-}
-
-export function handleToggleQuestions (questionType='unanswered') {
-  // return (dispatch) => {
-  //   dispatch(toggleQuestions(questionType))
-  // }
-
-  return (dispatch, getState) => {
-    const { authedUser, users } = getState()
-    const answeredQuestions = Object.keys(users[authedUser].answers)
-
-    dispatch(toggleQuestions(questionType, answeredQuestions))
-
-    // dispatch(showLoading())
-
-    // return saveTweet({
-    //   text,
-    //   author: authedUser,
-    //   replyingTo
-    // })
-    //   .then((tweet) => dispatch(addTweet(tweet)))
-    //   .then(() => dispatch(hideLoading()))
   }
 }
 
