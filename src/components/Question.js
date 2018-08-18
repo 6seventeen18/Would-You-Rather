@@ -12,21 +12,15 @@ class Question extends Component {
     const hasAnswered = Object.keys(loggedInUser.answers).indexOf(id) >= 0
 
     if (allowSubmit) {
-      console.log('allowSubmit = true')
       if (hasAnswered) {
-        console.log('hasAnswered = true')
         return this.questionWithStats()
       } else {
-        console.log('hasAnswered = false')
         return this.questionForSubmission()
       }
     } else {
-      console.log('allowSubmit = false')
       if (hasAnswered) {
-        console.log('hasAnswered = true')
         return this.answeredQuestion()
       } else {
-        console.log('hasAnswered = false')
         return this.unansweredQuestion()
       }
     }

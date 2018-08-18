@@ -28,8 +28,6 @@ class AddQuestion extends Component {
      const { pollOption1, pollOption2 } = this.state
      const { dispatch, id } = this.props
      // todo: Add Question to Store
-     console.log('New Question 1: ', pollOption1)
-     console.log('New Question 2: ', pollOption2)
 
      dispatch(handleAddQuestion(pollOption1, pollOption2, id))
 

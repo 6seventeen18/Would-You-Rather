@@ -12,7 +12,6 @@ class QuestionList extends Component {
   // }
   toggleQuestions = (e, questionType='unanswered') => {
     e.preventDefault()
-    console.log('toggle questions to: ', questionType)
     this.props.dispatch(handleToggleQuestions(questionType))
   }
 
