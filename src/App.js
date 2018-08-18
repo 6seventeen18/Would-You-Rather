@@ -33,10 +33,6 @@ class App extends Component {
                   <Route path='/leaderboard' component={LeaderBoard} />
                   <Route path='/add' component={AddQuestion} />
                   <Route path='/question/:id' component={QuestionPage} />
-                  { /* don't need this one
-                  <Route path='/create' render={() => (
-                    <Question match={{params: {id: '8xf0y6ziyjabvozdd253nd'}}} viewType='withStats' />
-                  )} /> */ }
                 </div>
               </div>
             }

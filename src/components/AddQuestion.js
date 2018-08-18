@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
+
 class AddQuestion extends Component {
   state = {
     pollOption1: '',
@@ -25,15 +27,20 @@ class AddQuestion extends Component {
   handleSubmit = (e) => {
     /* TODO: prevent submission if text less than 3 characters */
     e.preventDefault()
-     const { pollOption1, pollOption2 } = this.state
-     const { dispatch, id } = this.props
+    const { pollOption1, pollOption2 } = this.state
+    const { dispatch, id } = this.props
 
-     dispatch(handleAddQuestion(pollOption1, pollOption2, id))
-
-     this.setState(() => ({
+    this.setState(() => ({
       pollOption1: pollOption1,
       pollOption2: pollOption2
     }))
+
+    document.getElementById('submitQuestion').setAttribute("disabled","disabled");
+
+    dispatch(handleAddQuestion(pollOption1, pollOption2, id))
+    .then(() => {
+      this.props.history.push('/');
+    })
   }
 
   render() {
@@ -62,6 +69,7 @@ class AddQuestion extends Component {
                 </div>
 
                 <button
+                  id='submitQuestion'
                   className='btn btn-primary float-right'
                   type='submit'>
                     Submit
