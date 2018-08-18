@@ -4,11 +4,17 @@ import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import Question from './Question'
 import QuestionListNav from './QuestionListNav'
+import { handleToggleQuestions } from '../actions/questions'
 
 class QuestionList extends Component {
   // static propTypes = {
   //   viewType: PropTypes.string.isRequired,
   // }
+  toggleQuestions = (e, questionType='unanswered') => {
+    e.preventDefault()
+    console.log('toggle questions to: ', questionType)
+    this.props.dispatch(handleToggleQuestions(questionType))
+  }
 
   render() {
     // const { viewType } = this.props
@@ -19,7 +25,7 @@ class QuestionList extends Component {
         { /* TODO: This is just a stub for design purposes. QuestionList should be able
                    to render both types of questions, determine which type is currently
                    displayed, and show links to switch state */ }
-        <QuestionListNav viewType='unanswered' />
+        <QuestionListNav viewType='unanswered' toggle={this.toggleQuestions} />
 
         <div className='row'>
           <div className='col'></div>
