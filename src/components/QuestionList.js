@@ -19,14 +19,14 @@ class QuestionList extends Component {
         { /* TODO: This is just a stub for design purposes. QuestionList should be able
                    to render both types of questions, determine which type is currently
                    displayed, and show links to switch state */ }
-        <QuestionListNav viewType='withStats' />
+        <QuestionListNav viewType='unanswered' />
 
         <div className='row'>
           <div className='col'></div>
           <div className='col-8'>
             <div className="jumbotron pt-4 pb-4">
               {this.props.questionIds.map((id) => (
-                <Question viewType='answered' id={id} key={id} />
+                <Question id={id} key={id} />
               ))}
             </div>
           </div>
@@ -37,9 +37,14 @@ class QuestionList extends Component {
   }
 }
 
-function mapStateToProps ({ questions }) {
+function mapStateToProps ({ questions, users, authedUser }) {
+  const currentUser = users[authedUser]
+  const questionIds = Object.keys(questions)
+  const answeredQuestions = Object.keys(currentUser.answers)
+  const unansweredQuestions = questionIds.filter((q) => answeredQuestions.indexOf(q) < 0)
+
   return {
-    questionIds: Object.keys(questions)
+    questionIds: unansweredQuestions
       .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
   }
 }

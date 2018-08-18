@@ -6,14 +6,10 @@ import { FaCheckCircle } from 'react-icons/fa'
 import Pluralize from 'react-pluralize'
 
 class Question extends Component {
-  static propTypes = {
-    viewType: PropTypes.string.isRequired,
-  }
-
   render() {
     { /* TODO: Add additional text when there is a tie */ }
-    const { id, viewType, allowSubmit, loggedInUser } = this.props
-    const hasAnswered = Object.keys(loggedInUser.answers).indexOf(id)
+    const { id, allowSubmit, loggedInUser } = this.props
+    const hasAnswered = Object.keys(loggedInUser.answers).indexOf(id) >= 0
 
     if (allowSubmit) {
       console.log('allowSubmit = true')
@@ -71,7 +67,7 @@ class Question extends Component {
       <div>
         { (highlightOption)
           ?
-            <div class='.d-inline-block'>
+            <div className='.d-inline-block'>
               <mark><strong>{optionText}</strong></mark>
               <FaCheckCircle className='text-success' />
               <span className='font-italic text-success'>(your selection)</span>
@@ -84,7 +80,6 @@ class Question extends Component {
 
   /* view for question/:id when logged in user has answered */
   questionWithStats = () => {
-    const { viewType } = this.props
     const { author, optionOne, optionTwo } = this.props.question
     const { name, avatarURL } = author
     const optionOneText = optionOne.text
