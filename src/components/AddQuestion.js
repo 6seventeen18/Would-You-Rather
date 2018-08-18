@@ -27,7 +27,6 @@ class AddQuestion extends Component {
     e.preventDefault()
      const { pollOption1, pollOption2 } = this.state
      const { dispatch, id } = this.props
-     // todo: Add Question to Store
 
      dispatch(handleAddQuestion(pollOption1, pollOption2, id))
 
@@ -54,12 +53,12 @@ class AddQuestion extends Component {
                 <h4>Would You Rather</h4>
                 <div className='form-group'>
                   <h5><label htmlFor="pollOption1" className="float-left">Poll Option 1</label></h5>
-                  <input id="pollOption1" className="form-control form-control-lg" type="text" value={pollOption1} onChange={this.handleOption1Change} placeHolder="Enter an option with at least 3 characters"/>
+                  <input id="pollOption1" className="form-control form-control-lg" type="text" value={pollOption1} onChange={this.handleOption1Change} placeholder="Enter an option with at least 3 characters"/>
                 </div>
                 <h4>--OR--</h4>
                 <div className='form-group'>
                   <h5><label htmlFor="pollOption2" className="float-left text-large">Poll Option 2</label></h5>
-                  <input id="pollOption2" className="form-control form-control-lg" type="text" value={pollOption2} onChange={this.handleOption2Change} placeHolder="Enter an option with at least 3 characters"/>
+                  <input id="pollOption2" className="form-control form-control-lg" type="text" value={pollOption2} onChange={this.handleOption2Change} placeholder="Enter an option with at least 3 characters"/>
                 </div>
 
                 <button
