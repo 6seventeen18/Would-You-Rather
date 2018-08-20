@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import { FaCheckCircle } from 'react-icons/fa'
 import FormattedAnswer from './FormattedAnswer'
 
 class Question extends Component {
@@ -25,52 +24,6 @@ class Question extends Component {
       }
     }
   }
-
-  // /* for /question/:id */
-  // formattedAnswer = (firstOption, secondOption) => {
-  //   const optionText = firstOption.text
-  //   const firstOptionVotes = firstOption['votes'].length
-  //   const secondOptionVotes = secondOption['votes'].length
-  //
-  //   return (
-  //     <div>
-  //       { (firstOptionVotes >= secondOptionVotes)
-  //         ? <mark><strong>{optionText}</strong></mark>
-  //         : `${optionText}`
-  //       }
-  //
-  //       { firstOptionVotes >= secondOptionVotes
-  //           ? <FaCheckCircle className='text-success' />
-  //           : null
-  //       }
-  //       <span className='font-italic text-success'>
-  //         (
-  //         <Pluralize singular="vote" plural="votes" count={firstOptionVotes} />
-  //         /
-  //         {firstOptionVotes / (firstOptionVotes + secondOptionVotes) * 100}%)
-  //       </span>
-  //     </div>
-  //   )
-  // }
-  //
-  // /* for home page */
-  // formattedAnswerForUser = (option, highlightOption = false) => {
-  //   const optionText = option.text
-  //
-  //   return (
-  //     <div>
-  //       { (highlightOption)
-  //         ?
-  //           <div className='.d-inline-block'>
-  //             <mark><strong>{optionText}</strong></mark>
-  //             <FaCheckCircle className='text-success' />
-  //             <span className='font-italic text-success'>(your selection)</span>
-  //           </div>
-  //         : `${optionText}`
-  //       }
-  //     </div>
-  //   )
-  // }
 
   /* view for question/:id when logged in user has answered */
   questionWithStats = () => {
@@ -208,7 +161,6 @@ class Question extends Component {
   }
 }
 
-// function formatQuestion (question, users) {
 function formatQuestion (question, author) {
   return {
     id: question.id,
@@ -219,8 +171,6 @@ function formatQuestion (question, author) {
   }
 }
 
-// function mapStateToProps({authedUser, questions, users}, props) {
-// function mapStateToProps({authedUser, questions, users}, { id }) {
 function mapStateToProps({authedUser, questions, users}, props) {
   const { id } = props
   const question = questions[id]
