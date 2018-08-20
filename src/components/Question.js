@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import { FaCheckCircle } from 'react-icons/fa'
-import Pluralize from 'react-pluralize'
+import FormattedAnswer from './FormattedAnswer'
 
 class Question extends Component {
   render() {
@@ -26,54 +26,56 @@ class Question extends Component {
     }
   }
 
-  /* for /question/:id */
-  formattedAnswer = (firstOption, secondOption) => {
-    const optionText = firstOption.text
-    const firstOptionVotes = firstOption['votes'].length
-    const secondOptionVotes = secondOption['votes'].length
-
-    return (
-      <div>
-        { (firstOptionVotes >= secondOptionVotes)
-          ? <mark><strong>{optionText}</strong></mark>
-          : `${optionText}`
-        }
-
-        { firstOptionVotes >= secondOptionVotes
-            ? <FaCheckCircle className='text-success' />
-            : null
-        }
-        <span className='font-italic text-success'>
-          (
-          <Pluralize singular="vote" plural="votes" count={firstOptionVotes} />
-          /
-          {firstOptionVotes / (firstOptionVotes + secondOptionVotes) * 100}%)
-        </span>
-      </div>
-    )
-  }
-
-  /* for home page */
-  formattedAnswerForUser = (option, highlightOption = false) => {
-    const optionText = option.text
-
-    return (
-      <div>
-        { (highlightOption)
-          ?
-            <div className='.d-inline-block'>
-              <mark><strong>{optionText}</strong></mark>
-              <FaCheckCircle className='text-success' />
-              <span className='font-italic text-success'>(your selection)</span>
-            </div>
-          : `${optionText}`
-        }
-      </div>
-    )
-  }
+  // /* for /question/:id */
+  // formattedAnswer = (firstOption, secondOption) => {
+  //   const optionText = firstOption.text
+  //   const firstOptionVotes = firstOption['votes'].length
+  //   const secondOptionVotes = secondOption['votes'].length
+  //
+  //   return (
+  //     <div>
+  //       { (firstOptionVotes >= secondOptionVotes)
+  //         ? <mark><strong>{optionText}</strong></mark>
+  //         : `${optionText}`
+  //       }
+  //
+  //       { firstOptionVotes >= secondOptionVotes
+  //           ? <FaCheckCircle className='text-success' />
+  //           : null
+  //       }
+  //       <span className='font-italic text-success'>
+  //         (
+  //         <Pluralize singular="vote" plural="votes" count={firstOptionVotes} />
+  //         /
+  //         {firstOptionVotes / (firstOptionVotes + secondOptionVotes) * 100}%)
+  //       </span>
+  //     </div>
+  //   )
+  // }
+  //
+  // /* for home page */
+  // formattedAnswerForUser = (option, highlightOption = false) => {
+  //   const optionText = option.text
+  //
+  //   return (
+  //     <div>
+  //       { (highlightOption)
+  //         ?
+  //           <div className='.d-inline-block'>
+  //             <mark><strong>{optionText}</strong></mark>
+  //             <FaCheckCircle className='text-success' />
+  //             <span className='font-italic text-success'>(your selection)</span>
+  //           </div>
+  //         : `${optionText}`
+  //       }
+  //     </div>
+  //   )
+  // }
 
   /* view for question/:id when logged in user has answered */
   questionWithStats = () => {
+    const question = this.props.question
+    const loggedInUser = this.props.loggedInUser
     const { author, optionOne, optionTwo } = this.props.question
     const { name, avatarURL } = author
     const optionOneText = optionOne.text
@@ -92,11 +94,11 @@ class Question extends Component {
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
-                { this.formattedAnswer(optionOne, optionTwo) }
+                <FormattedAnswer question={question} loggedInUser={loggedInUser} option="optionOne" showStats={true} />
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
               <div className='card-text'>
-                { this.formattedAnswer(optionTwo, optionOne) }
+                <FormattedAnswer question={question} loggedInUser={loggedInUser} option="optionTwo" showStats={true} />
               </div>
             </div>
           </div>
@@ -143,11 +145,11 @@ class Question extends Component {
 
   /* view for question on home page when logged in user has answered */
   answeredQuestion = () => {
-    const { id, author, optionOne, optionTwo } = this.props.question
+    const question = this.props.question
+    const loggedInUser = this.props.loggedInUser
+    const { id, author } = question
     const { name, avatarURL } = author
     const navLink = `/question/${id}`
-    const highlightOptionOne = author.answers[id] === 'optionOne'
-    const highlightOptionTwo = author.answers[id] === 'optionTwo'
 
     return (
       <div className='card text-left mb-3'>
@@ -163,11 +165,11 @@ class Question extends Component {
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
-                { this.formattedAnswerForUser(optionOne, highlightOptionOne) }
+                <FormattedAnswer question={question} loggedInUser={loggedInUser} option="optionOne" />
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
               <div className='card-text'>
-                { this.formattedAnswerForUser(optionTwo, highlightOptionTwo) }
+                <FormattedAnswer question={question} loggedInUser={loggedInUser} option="optionTwo" />
               </div>
             </div>
           </div>
