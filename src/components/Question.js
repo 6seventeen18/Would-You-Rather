@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import FormattedAnswer from './FormattedAnswer'
+import { handlePickOption } from '../actions/questions'
 
 class Question extends Component {
   render() {
@@ -23,6 +24,21 @@ class Question extends Component {
         return this.unansweredQuestion()
       }
     }
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const answer = e.target.dataset.option
+    const { authedUser, dispatch } = this.props
+    const { id } = this.props.question
+
+    dispatch(handlePickOption({
+      qid: id,
+      answer,
+      authedUser,
+    }))
+
   }
 
   /* view for question/:id when logged in user has answered */
@@ -80,13 +96,13 @@ class Question extends Component {
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
                 { /* TODO: This will need to submit the answer */ }
-                <NavLink to='/answered-question' className="btn btn-primary mr-2">pick me!</NavLink>
+                <a href="#" data-option="optionOne" className="btn btn-primary mr-2" onClick={this.handleSubmit}>pick me!</a>
                 {optionOne.text}
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
               <div className='card-text'>
               { /* TODO: This will need to submit the answer */ }
-                <NavLink to='/answered-question' className="btn btn-primary mr-2">pick me!</NavLink>
+                <a href="#" data-option="optionTwo" className="btn btn-primary mr-2" onClick={this.handleSubmit}>pick me!</a>
                 {optionTwo.text}
               </div>
             </div>
