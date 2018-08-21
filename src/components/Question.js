@@ -38,7 +38,6 @@ class Question extends Component {
       answer,
       authedUser,
     }))
-
   }
 
   /* view for question/:id when logged in user has answered */

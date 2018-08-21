@@ -20,7 +20,6 @@ import {
       }
     case USER_SUBMISSION :
       const { qid, authedUser, answer } = action
-      // debugger
 
       return {
         ...state,

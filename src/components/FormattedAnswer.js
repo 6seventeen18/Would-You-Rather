@@ -17,9 +17,18 @@ class FormattedAnswer extends Component {
     const optionOneVotes = optionOne['votes'].length
     const optionTwoVotes = optionTwo['votes'].length
     const showStats = this.props.showStats || false
-    const stats = option === 'optionOne'
-      ? (optionOneVotes / (optionOneVotes + optionTwoVotes) * 100)
-      : (optionTwoVotes / (optionOneVotes + optionTwoVotes) * 100)
+
+    let optionVotes = 0
+    let stats = 0
+
+    if (option === 'optionOne') {
+      stats = (optionOneVotes / (optionOneVotes + optionTwoVotes) * 100)
+      optionVotes = optionOneVotes
+    } else {
+      stats = (optionTwoVotes / (optionOneVotes + optionTwoVotes) * 100)
+      optionVotes = optionTwoVotes
+    }
+
     const userSelectedOption = loggedInUser.answers[question.id]
     const markAsSelected = userSelectedOption && userSelectedOption === option
 
@@ -37,7 +46,7 @@ class FormattedAnswer extends Component {
             ?
               <span className='font-italic text-success'>
                 (
-                <Pluralize singular="vote" plural="votes" count={optionOneVotes} />
+                <Pluralize singular="vote" plural="votes" count={optionVotes} />
                 /
                 {stats}%)
               </span>
