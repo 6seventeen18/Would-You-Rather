@@ -9,6 +9,7 @@ import QuestionPage from './components/QuestionPage'
 import Question from './components/Question'
 import AnsweredQuestionList from './components/AnsweredQuestionList'
 import UnansweredQuestionList from './components/UnansweredQuestionList'
+import LoginForm from './components/LoginForm'
 import Nav from './components/Nav'
 
 class App extends Component {
@@ -24,7 +25,9 @@ class App extends Component {
           <LoadingBar />
           <div>
             { this.props.loading === true
-              ? null
+              ? <div>
+                  <LoginForm path='/' component={LoginForm} />
+                </div>
               : <div>
                   <Nav />
                   <div className='container'>
