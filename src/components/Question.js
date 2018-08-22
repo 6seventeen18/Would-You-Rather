@@ -56,10 +56,10 @@ class Question extends Component {
         <div className='card-header'>Stats for Poll by {author.name}</div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
-            <div className='column border-right p-3'>
+            <div className='column border-right p-2'>
               <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
-            <div className='column ml-3 p-3'>
+            <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
                 <FormattedAnswer question={question} loggedInUser={loggedInUser} option="optionOne" showStats={true} />
@@ -88,10 +88,10 @@ class Question extends Component {
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
-            <div className='column border-right p-3'>
+            <div className='column border-right p-2'>
               <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
-            <div className='column ml-3 p-3'>
+            <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
                 { /* TODO: This will need to submit the answer */ }
@@ -127,10 +127,10 @@ class Question extends Component {
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
-            <div className='column border-right p-3'>
+            <div className='column border-right p-2'>
               <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
-            <div className='column ml-3 p-3'>
+            <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
                 <FormattedAnswer question={question} loggedInUser={loggedInUser} option="optionOne" />
@@ -160,10 +160,10 @@ class Question extends Component {
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
-            <div className='column border-right p-3'>
+            <div className='column border-right p-2'>
               <img src={avatarURL} className='img-fluid rounded-circle'/>
             </div>
-            <div className='column ml-3 p-3'>
+            <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>{optionOne.text}</div>
               <div className='card-text font-weight-bold'>-- OR --</div>
