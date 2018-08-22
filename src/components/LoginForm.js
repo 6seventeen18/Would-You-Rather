@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setAuthedUser } from '../actions/authedUser'
+import { handleLoginUser } from '../actions/authedUser'
 import { NavLink } from 'react-router-dom'
 
 class LoginForm extends Component {
+  handleSelectUser = (e) => {
+    const selectedIndex = document.getElementById('userSelect').selectedIndex
+    const userId = document.getElementById('userSelect').options[selectedIndex].value
+    const { dispatch } = this.props
+
+    if (userId === '') {
+      return
+    } else {
+      dispatch(handleLoginUser(userId))
+    }
+  }
+
   render () {
     const { users } = this.props
-    debugger
+
     const userIds = Object.keys(users).sort((a,b) => users[a].name > users[b].name)
     return (
       <div className='container'>
@@ -16,10 +28,10 @@ class LoginForm extends Component {
             <form>
               <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">Please select a user to log in:</label>
-                <select className="form-control" id="exampleFormControlSelect1">
-                  <option value='0'></option>
+                <select className="form-control" id="userSelect" onChange={this.handleSelectUser}>
+                  <option value=''></option>
                   { userIds.map((userId) => (
-                    <option value={userId}>{users[userId].name}</option>
+                    <option key={userId} value={userId}>{users[userId].name}</option>
                   )) }
                 </select>
               </div>
