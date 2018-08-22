@@ -9,7 +9,7 @@ export function setAuthedUser (id) {
   }
 }
 
-export function handleLoginUser (userId) {
+export function handleSetAuthedUser (userId) {
   return (dispatch) => {
     return dispatch(setAuthedUser(userId))
   }

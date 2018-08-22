@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleLoginUser } from '../actions/authedUser'
+import { handleSetAuthedUser } from '../actions/authedUser'
 import { NavLink } from 'react-router-dom'
 
 class LoginForm extends Component {
@@ -12,7 +12,7 @@ class LoginForm extends Component {
     if (userId === '') {
       return
     } else {
-      dispatch(handleLoginUser(userId))
+      dispatch(handleSetAuthedUser(userId))
     }
   }
 

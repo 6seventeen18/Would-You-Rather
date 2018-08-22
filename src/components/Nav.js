@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { handleSetAuthedUser } from '../actions/authedUser'
 
 class Nav extends Component {
+  logout = () => {
+    const { dispatch } = this.props
+
+    dispatch(handleSetAuthedUser(null))
+  }
+
   render() {
     const { userName } = this.props
     return (
@@ -13,7 +20,7 @@ class Nav extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
+              <li className="nav-item">
                 <NavLink to='/' exact className="nav-link">Home</NavLink>
               </li>
               <li className="nav-item">
@@ -26,7 +33,7 @@ class Nav extends Component {
             <div className="navbar-brand">Signed in as {userName}</div>
             <ul className="navbar-nav form-inline mt-2 mt-md-0">
               <li className="nav-item float-right">
-                <NavLink className="nav-link" to='/'>Sign Out</NavLink>
+                <NavLink className="nav-link" to='#' onClick={this.logout}>Sign Out</NavLink>
               </li>
             </ul>
           </div>
