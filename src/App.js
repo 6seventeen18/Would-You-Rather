@@ -6,7 +6,6 @@ import LeaderBoard from './components/LeaderBoard'
 import LoadingBar from 'react-redux-loading-bar'
 import AddQuestion from './components/AddQuestion'
 import QuestionPage from './components/QuestionPage'
-import Question from './components/Question'
 import AnsweredQuestionList from './components/AnsweredQuestionList'
 import UnansweredQuestionList from './components/UnansweredQuestionList'
 import LoginForm from './components/LoginForm'
@@ -19,7 +18,6 @@ class App extends Component {
 
   render() {
     return (
-
       <Router>
         <Fragment>
           <LoadingBar />

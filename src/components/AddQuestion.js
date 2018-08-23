@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 
-import { showLoading, hideLoading } from 'react-redux-loading-bar'
-
 class AddQuestion extends Component {
   state = {
     pollOption1: '',

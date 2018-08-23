@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import FormattedAnswer from './FormattedAnswer'
 import { handlePickOption } from '../actions/questions'
 
 class Question extends Component {
   render() {
-    { /* TODO: Add additional text when there is a tie */ }
     const { id, allowSubmit, loggedInUser } = this.props
     const hasAnswered = Object.keys(loggedInUser.answers).indexOf(id) >= 0
 
@@ -44,20 +42,16 @@ class Question extends Component {
   questionWithStats = () => {
     const question = this.props.question
     const loggedInUser = this.props.loggedInUser
-    const { author, optionOne, optionTwo } = this.props.question
+    const { author } = this.props.question
     const { name, avatarURL } = author
-    const optionOneText = optionOne.text
-    const optionTwoText = optionTwo.text
-    const optionOneVotes = optionOne['votes'].length
-    const optionTwoVotes = optionTwo['votes'].length
 
     return(
       <div className='card text-left mb-3'>
-        <div className='card-header'>Stats for Poll by {author.name}</div>
+        <div className='card-header'>Stats for Poll by {name}</div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-2'>
-              <img src={avatarURL} className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle' alt={name}/>
             </div>
             <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
@@ -77,9 +71,8 @@ class Question extends Component {
 
   /* view for question/:id when logged in user has not answered */
   questionForSubmission = () => {
-    const { id, author, optionOne, optionTwo } = this.props.question
+    const { author, optionOne, optionTwo } = this.props.question
     const { name, avatarURL } = author
-    const navLink = `/question/${id}`
 
     return(
       <div className='card text-left mb-3'>
@@ -89,19 +82,17 @@ class Question extends Component {
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-2'>
-              <img src={avatarURL} className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle' alt={name}/>
             </div>
             <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
               <div className='card-text'>
-                { /* TODO: This will need to submit the answer */ }
-                <a href="#" data-option="optionOne" className="btn btn-primary mr-2" onClick={this.handleSubmit}>pick me!</a>
+                <button data-option="optionOne" className="btn btn-primary mr-2" onClick={this.handleSubmit}>pick me!</button>
                 {optionOne.text}
               </div>
               <div className='card-text font-weight-bold'>-- OR --</div>
               <div className='card-text'>
-              { /* TODO: This will need to submit the answer */ }
-                <a href="#" data-option="optionTwo" className="btn btn-primary mr-2" onClick={this.handleSubmit}>pick me!</a>
+                <button data-option="optionTwo" className="btn btn-primary mr-2" onClick={this.handleSubmit}>pick me!</button>
                 {optionTwo.text}
               </div>
             </div>
@@ -128,7 +119,7 @@ class Question extends Component {
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-2'>
-              <img src={avatarURL} className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle' alt={name}/>
             </div>
             <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>
@@ -155,13 +146,13 @@ class Question extends Component {
     return(
       <div className='card text-left mb-3'>
         <div className='card-header'>
-          Poll by { author.name }
+          Poll by { name }
           <NavLink to={navLink} exact className="btn btn-primary float-right">Answer Poll</NavLink>
         </div>
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-2'>
-              <img src={avatarURL} className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle' alt={name}/>
             </div>
             <div className='column ml-3 p-2'>
               <p className='card-text font-weight-bold'>Would You Rather:</p>

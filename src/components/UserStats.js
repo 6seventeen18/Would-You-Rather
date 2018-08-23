@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatUser, formatDate } from '../utils/helpers'
+import { formatUser } from '../utils/helpers'
 
 class UserStats extends Component {
   render() {
@@ -15,7 +15,7 @@ class UserStats extends Component {
         <div className='card-body p-0'>
           <div className='row ml-0 mr-0'>
             <div className='column border-right p-3'>
-              <img src={avatarURL} className='img-fluid rounded-circle'/>
+              <img src={avatarURL} className='img-fluid rounded-circle' alt={name}/>
             </div>
             <div className='column ml-3 p-3'>
               <p className='card-text font-weight-bold'>Questions Asked: {questionsAsked}</p>

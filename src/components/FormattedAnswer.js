@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { FaCheckCircle } from 'react-icons/fa'
 import Pluralize from 'react-pluralize'
 
 class FormattedAnswer extends Component {
@@ -28,6 +27,8 @@ class FormattedAnswer extends Component {
       stats = (optionTwoVotes / (optionOneVotes + optionTwoVotes) * 100)
       optionVotes = optionTwoVotes
     }
+
+    stats = Math.round(stats)
 
     const userSelectedOption = loggedInUser.answers[question.id]
     const markAsSelected = userSelectedOption && userSelectedOption === option

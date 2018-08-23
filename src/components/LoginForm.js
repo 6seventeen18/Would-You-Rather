@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleSetAuthedUser } from '../actions/authedUser'
-import { NavLink } from 'react-router-dom'
 
 class LoginForm extends Component {
   handleSelectUser = (e) => {
