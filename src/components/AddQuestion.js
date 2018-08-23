@@ -10,23 +10,38 @@ class AddQuestion extends Component {
     pollOption2: '',
   }
 
+  handleSubmitButtonState = () => {
+    debugger
+    if (this.state.pollOption1.length >= 3 && this.state.pollOption2.length >= 3) {
+      document.getElementById('submitQuestion').disabled = false
+    } else {
+      document.getElementById('submitQuestion').disabled = true
+    }
+  }
+
   handleOption1Change = (e) => {
     const pollOption1 = e.target.value
-    this.setState(() => ({
+
+    this.setState({
       pollOption1
-    }))
+    }, () => {
+      this.handleSubmitButtonState()
+    })
   }
 
   handleOption2Change = (e) => {
     const pollOption2 = e.target.value
-    this.setState(() => ({
+
+    this.setState({
       pollOption2
-    }))
+    }, () => {
+      this.handleSubmitButtonState()
+    })
   }
 
   handleSubmit = (e) => {
-    /* TODO: prevent submission if text less than 3 characters */
     e.preventDefault()
+
     const { pollOption1, pollOption2 } = this.state
     const { dispatch, id } = this.props
 
@@ -45,8 +60,6 @@ class AddQuestion extends Component {
 
   render() {
     const { pollOption1, pollOption2 } = this.state
-
-    {/* todo: Redirect to / if submitted */}
 
     return (
       <div className='container text-center'>
@@ -71,7 +84,8 @@ class AddQuestion extends Component {
                 <button
                   id='submitQuestion'
                   className='btn btn-primary float-right'
-                  type='submit'>
+                  type='submit'
+                  disabled={true}>
                     Submit
                 </button>
               </form>
