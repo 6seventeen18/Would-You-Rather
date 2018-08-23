@@ -6,8 +6,17 @@ import { handlePickOption } from '../actions/questions'
 
 class Question extends Component {
   render() {
-    const { id, allowSubmit, loggedInUser } = this.props
+    const { id, question, allowSubmit, loggedInUser } = this.props
     const hasAnswered = Object.keys(loggedInUser.answers).indexOf(id) >= 0
+
+    if (!question) {
+      return (
+        <div>
+          <h1>404</h1>
+          <p>We're sorry, the question with the ID {id} could not be found.</p>
+        </div>
+      )
+    }
 
     if (allowSubmit) {
       if (hasAnswered) {
